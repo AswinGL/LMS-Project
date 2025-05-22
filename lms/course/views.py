@@ -16,12 +16,34 @@ from django.contrib.auth.decorators import login_required
 
 class CourseListView(View):
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args , **kwargs):
 
+        query = request.GET.get('query')
+        print(query)
 
-        data = { 'page' : 'login-page'}
+        courses = Course.objects.all()
 
-        return render(request,'courses/courses-list.html',context = data)
+        if query:
+
+                courses = Course.objects.filter(Q(title__icontains = query)|
+                                                Q(description__icontains = query)|
+                                                Q(instructor__name__icontains =query)| # since instructor is a forign key we have to specify the name of instructor
+                                                Q(category__icontains = query)|
+                                                Q(type__icontains = query)|
+                                                Q(level__icontains =query)|
+                                                Q(fees__icontains = query))
+
+        
+
+        print(courses)
+
+        data = {
+             'query' : query,
+            'courses': courses,
+            'page' : 'courses-page'
+        }
+        return render(request, 'courses/courses-list.html', context= data)
+    
     
     
 class HomeListView(View):
@@ -32,7 +54,7 @@ class HomeListView(View):
 
         return render(request,'courses/home.html',context = data)
     
-@login_required(login_url='login')   
+# @login_required(login_url='login')   
     
 class InstructorCourseListView(View):
 
