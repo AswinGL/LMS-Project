@@ -1,0 +1,94 @@
+{% extends 'base.html'%}
+
+{% block section %}
+
+<div class="container my-5">
+    <div class="card border-primary">
+      <div class="card-header bg-primary text-white text-center fw-bold fs-4">
+        Create New Course
+      </div>
+      <div class="card-body">
+        <form method='post' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class='row mb-3'>
+                <div class='col-md-6'>
+                <label for="courseTitle" class="form-label">Course Title</label>
+                <!-- <input type="text" class="form-control" id="courseTitle" placeholder="Enter course title" name='title'> -->
+                 {{ form.title }}
+            </div>
+            <div class='col-md-6'>
+
+                <label for="courseImage" class="form-label">Course Image</label>
+                <!-- <input class="form-control" type="file" id="courseImage" name='image'> -->
+                 {{ form.image }}
+
+            </div>
+            <div>
+
+            </div>
+  
+          <div class="mb-3">
+            <label for="courseDescription" class="form-label">Description</label>
+            <!-- <textarea class="form-control" id="courseDescription" rows="4" placeholder="Enter course description" name='description'></textarea> -->
+             {{ form.description }}
+          </div>
+  
+          <div class="mb-3">
+            <label for="courseCategory" class="form-label">Category</label>
+            <!-- <select class="form-select" id="courseCategory" name='category'> -->
+              {{ form.category }}
+              <option selected disabled>Select category</option>
+
+              {% for category in categories %}
+              <option value="{{category.value}}">{{ category.label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+  
+          <div class="mb-3">
+            <label for="courseLevel" class="form-label">Level</label>
+            <!-- <select class="form-select" id="courseLevel" name='level'> -->
+              {{ form.level }}
+              <option selected disabled>Select level</option>
+              {% for level in levels %}
+              <option value="{{ level.value }}">{{ level.label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          
+          <div class="mb-3">
+            <label for="courseCategory" class="form-label">Type</label>
+            <!-- <select class="form-select" id="courseCategory" name='category'> -->
+              {{ form.type }}
+              <option selected disabled>Select Type</option>
+
+              {% for type in types %}
+              <option value="{{category.value}}">{{ type.label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+  
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="courseFee" class="form-label">Fee</label>
+              <!-- <input type="text" class="form-control" id="courseFee" placeholder="e.g., $499" name='fee'> -->
+               {{ form.fee }}
+            </div>
+            <div class="col-md-6">
+              <label for="offerFee" class="form-label">Offer Fee</label>
+              <!-- <input type="text" class="form-control" id="offerFee" placeholder="e.g., $299" name='offer_fee'> -->
+               {{ form.offer_fee }}
+            </div>
+          </div>
+  
+  
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Create Course</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

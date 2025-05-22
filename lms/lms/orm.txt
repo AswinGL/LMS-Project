@@ -1,0 +1,35 @@
+CRUD With ORM
+
+----Insert a Record
+
+Courses.objects.create()
+
+create
+
+Books.objects.create(title='Goat Life',author='Benyamin',
+                     genre='Novel',price='150',image='photo.jpg')
+
+Courses.objects.create(title='Python Django',description='jfgwfygwggfhewfguw',
+                       image='phooto.jpg',instructor='Anzil',
+                       category='It & Software',level='advance',
+                       fee=100000,offer_fee=80000)
+
+
+Courses.objects.all()
+
+Courses.objects.get(Id=5)
+
+Courses.objects.filter(level='beginner')
+
+Courses.objects.filter(fee=30000)
+
+Courses.objects.filter(fee__lte=50000)
+
+Courses.objects.filter().exclude(level='beginner')
+
+
+Courses.objects.filter(level= 'begginner' | level = 'intermediate')
+
+Courses.objects.filter(Q(title __icontains = querry) | Q(description __icontains = querry ) |
+                        Q(image __icontains = querry) | Q(category __icontains = querry))
+
