@@ -89,6 +89,22 @@
             <p class="text-danger">{{ form.type.errors | join:" " }}</p>
          {% endif %}
           </div>
+
+          <div class="mb-3">
+            <label for="courseLevel" class="form-label">Tags</label>
+            <!-- <select class="form-select" name="level" id="courseLevel">
+              <option selected disabled>Select level</option>
+
+              {% for level in levels %}
+              <option value="{{level.value}}">{{level.label}}</option>
+              {% endfor %}
+            </select> -->
+
+            {{ form.tags }}
+            {% if form.tags.errors %}
+            <p class="text-danger">{{ form.tags.errors | join:" " }}</p>
+         {% endif %}
+          </div>
   
           <div class="row mb-3">
             <div class="col-md-6">

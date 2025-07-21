@@ -42,7 +42,7 @@
           </div>
   
           <div class="mb-3">
-            <label for="courseCategory" class="form-label">Qualification</label>
+            <label for="courseCategory" class="form-label">Category</label>
             <!-- <select class="form-select" name="category" id="courseCategory">
               <option selected disabled>Select category</option>
               {% for category in categories %}
@@ -70,6 +70,7 @@
             <p class="text-danger">{{ form.level.errors | join:" " }}</p>
          {% endif %}
           </div>
+
           <div class="mb-3">
             <label for="courseLevel" class="form-label">Type</label>
             <!-- <select class="form-select" name="level" id="courseLevel">
@@ -85,14 +86,30 @@
             <p class="text-danger">{{ form.type.errors | join:" " }}</p>
          {% endif %}
           </div>
+
+          <div class="mb-3">
+            <label for="courseLevel" class="form-label">Tags</label>
+            <!-- <select class="form-select" name="level" id="courseLevel">
+              <option selected disabled>Select level</option>
+
+              {% for level in levels %}
+              <option value="{{level.value}}">{{level.label}}</option>
+              {% endfor %}
+            </select> -->
+
+            {{ form.tags }}
+            {% if form.tags.errors %}
+            <p class="text-danger">{{ form.tags.errors | join:" " }}</p>
+         {% endif %}
+          </div>
   
           <div class="row mb-3">
             <div class="col-md-6">
               <label for="courseFee" class="form-label">Fee</label>
               <!-- <input type="text" class="form-control" name="fees" id="courseFee" placeholder="e.g., $499"> -->
-              {{ form.fees }}
-              {% if form.fees.errors %}
-              <p class="text-danger">{{ form.fees.errors | join:" " }}</p>
+              {{ form.fee }}
+              {% if form.fee.errors %}
+              <p class="text-danger">{{ form.fee.errors | join:" " }}</p>
               {% endif %}
             </div>
             <div class="col-md-6">
@@ -100,7 +117,7 @@
               <!-- <input type="text" name="offer_fee" class="form-control" id="offerFee" placeholder="e.g., $299"> -->
 
               {{ form.offer_fee }}
-              {% if form.offer_fees.errors %}
+              {% if form.offer_fee.errors %}
               <p class="text-danger">{{ form.offer_fee.errors | join:" "}}</p>
               {% endif %}
             </div>

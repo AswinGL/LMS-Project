@@ -1,62 +1,77 @@
-# Model Forms
 from django import forms
 
-from .models import Course ,  CategoryChoices , LevelChoices , Typechoice
+from .models import Courses,CategoryChoices,LevelChoices,TypeChoices
 
 class CourseCreateForm(forms.ModelForm):
-    class Meta:
-        model = Course
-        # fields = ['title', 'description', 'image', 'category', 'level', 'fee', 'offer_fee']
-        # fields = '_all_'
-        exclude = ['instructor','active_status','uuid']
+
+    class Meta :
+
+        model = Courses
+
+        # fields = ['title', 'description', 'image', 'category' , 'level', 'fees', 'offer_fee']
+
+        # field = '__all__'
+
+        exclude = ['instructor', 'uuid', 'active_status' ]
 
         widgets = {
-            'title' : forms.TextInput(attrs={
-                'class' : 'form-control',
-                'placeholder' : 'Enter Course Title',
-                'required' : 'required',
-            }),
 
-            'image' : forms.FileInput(attrs={
-                'class' : 'form-control',
-                
-            }),
+            'title' : forms.TextInput( attrs={
+                                            'class':'form-control',
+                                            'required':'required',
+                                            'placeholder': 'Enter Course Name '
+                                    }),
+            'image' : forms.FileInput( attrs = {
 
-            'description' : forms.Textarea(attrs={
-                'class' : 'form-control',
-                'placeholder' : 'Enter Course Description',
-                'required' : 'required',
-            }),
-            
+                                            'class': 'form-control',
+                                            
+                                     }),
+            'description' :forms.Textarea( attrs={
+                                            'class' : 'form-control',
+                                            'required' : 'required',
+                                            'placeholder' : "Enter course description"
 
-            'fee' : forms.NumberInput(attrs={
-                'class' : 'form-control',
-                'required' : 'required',
-                'placeholder': 'Enter Course Fee'
-            }),
+                                    }),
+            'tags' :forms.TextInput( attrs={
+                                            'class' : 'form-control',
+                                            'required' : 'required',
+                                            'placeholder' : "Enter the Tags"
+
+                                    }),
+
+
+            'fees': forms.NumberInput(attrs= {
+                                        'class' : 'form-control',
+                                        'required' : 'required',
+                                        'placeholder' : "Enter course fees"
+                                    }),
 
             'offer_fee' : forms.NumberInput(attrs={
-                'class' : 'form-control',
-                'placeholder': 'Enter Offer Fee'
-            }),
+                                        'class' : 'form-control',
+                                    
+                                        'placeholder' : "Enter offer fees"
+
+                                    }),
 
         }
+    
+    category = forms.ChoiceField(choices= CategoryChoices.choices,widget= forms.Select( 
+                                                                        attrs={
 
-    category = forms.ChoiceField(choices=CategoryChoices.choices,widget=forms.Select(attrs={
-        'class' : 'form-control',
-        'required' : 'required',
-    }))
+                                                                        
+                                              'required' : 'required',
+                                              'class' : 'form-select'                          
+                                }))
+    level = forms.ChoiceField(choices= LevelChoices.choices,widget= forms.Select( attrs= {
 
-    level = forms.ChoiceField(choices=LevelChoices.choices,widget=forms.Select(attrs={
-        'class' : 'form-control',
-        'required' : 'required',
-    }))
+                                              'required' : 'required',
+                                              'class' : 'form-select'  
+                                }))
+    type = forms.ChoiceField(choices= TypeChoices.choices,widget= forms.Select( attrs= {
 
-    type = forms.ChoiceField(choices=Typechoice.choices,widget=forms.Select(attrs={
-        'class' : 'form-control',
-        'required' : 'required',
-    }))
-
+                                              'required' : 'required',
+                                              'class' : 'form-select'  
+                                }))
 
     def clean(self):
 
@@ -74,10 +89,10 @@ class CourseCreateForm(forms.ModelForm):
         print(validated_data)
         return validated_data
     
-    def __init__(self,*args,**kwargs):
+    def __init__(self, *args, **kwargs):
 
-        super(CourseCreateForm,self).__init__(*args,**kwargs)
+        super(CourseCreateForm,self).__init__(*args, **kwargs)
 
         if not self.instance :
 
-            self.fields.get('image').widget.attrs['required']='required'
+            self.fields.get('image').widget.attrs['required'] = 'required'

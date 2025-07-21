@@ -1,15 +1,19 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 import uuid
 
-
-
-# Create your models here.
+# Create your models here .
 
 category_choices =[
+
     ('IT & Software' , 'IT & Software'),
+
     ('Finance' , 'Finance'),
+
     ('Marketing' , 'Marketing')
+    
 ]
 
 class BaseClass(models.Model):
@@ -25,10 +29,6 @@ class BaseClass(models.Model):
     class Meta:
 
         abstract = True
-
-
-
-
 
 class CategoryChoices(models.TextChoices):
 
@@ -47,14 +47,14 @@ class LevelChoices(models.TextChoices):
 
     ADVANCE='Advance','Advance'
 
-class Typechoice(models.TextChoices):
+class TypeChoices(models.TextChoices):
 
     FREE = 'Free', 'Free'
 
     PREMIUM = 'Premium', 'Premium'
 
 
-class Course(BaseClass):
+class Courses(BaseClass):
 
     title = models.CharField(max_length=50)
 
@@ -69,7 +69,9 @@ class Course(BaseClass):
 
     level = models.CharField(max_length=25,choices=LevelChoices.choices)
 
-    type = models.CharField(max_length=20,choices=Typechoice.choices)
+    type = models.CharField(max_length=20,choices=TypeChoices.choices)
+
+    tags = models.TextField(max_length=100)
 
     fee = models.DecimalField(max_digits=8,decimal_places=2)
 
@@ -77,10 +79,8 @@ class Course(BaseClass):
 
 
     def __str__(self):
-         return f'{self.title}-{self.instructor}'
-
-
-
+        
+        return f'{self.title}-{self.instructor}'
 
     class Meta:
 

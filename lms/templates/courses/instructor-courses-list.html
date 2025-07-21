@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 
-
 {% block section %}
 
 <div class="container my-5">
+
+      <div class="row justify-content-end">
+            <div class="col-6 my-4 ">
+                <form action="{% url 'instructor-courses-list' %}" method="get">
+                <input class="form-control" type="text" placeholder="Search courses" name="query"{% if query %} value="{{query}}" {% endif %}>
+                </form>
+            </div>
+
     <div class="card border-primary">
+
       <div class="card-header bg-primary  d-flex  justify-content-between  ">
         <h3 class="text-white fw-bold fs-4">Your Courses</h3>
         <a href=" {% url 'course-create' %}" class="btn btn-success border border-success rounded-3"> Create a course </a>
@@ -42,4 +50,5 @@
       </div>
     </div>
   </div>
+
 {% endblock %}
