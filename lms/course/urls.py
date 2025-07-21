@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     
-path('courses-list/', views.CoursesListView.as_view(), name='courses-list'),
 
 path('course-details/<str:uuid>/', views.CoursesDetailView.as_view(), name='course-details'),
 
